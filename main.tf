@@ -15,5 +15,10 @@ resource "azurerm_key_vault" "tf_kv" {
     bypass         = "AzureServices"
     ip_rules       = var.ip_rules
   }
+  lifecycle {
+    ignore_changes = [
+      network_acls[0].ip_rules
+    ]
+  }
   tags = var.tags
 }
